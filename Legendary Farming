@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _3._Legendary_Farming
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var legendaryItem = new Dictionary<string, int>();
+            legendaryItem["shards"] = 0;
+            legendaryItem["motes"] = 0;
+            legendaryItem["fragments"] = 0;
+
+            var anoderItem = new Dictionary<string, int>();
+            
+            while (true)
+            {
+                string[] text = Console.ReadLine().ToLower().Split().ToArray();
+                bool haveWiner = false;
+                for (int i = 0; i < text.Length; i += 2)
+                {
+                    string type = text[i + 1];
+                    int quantity = int.Parse(text[i]);
+
+                    if (legendaryItem.ContainsKey(type))
+                    {
+                        legendaryItem[type] += quantity;
+                        if (legendaryItem[type] >= 250)
+                        {
+                            legendaryItem[type] -= 250;
+                            haveWiner = true;
+                            if (type == "shards")
+                            {
+                                Console.WriteLine("Shadowmourne obtained!");
+                            }
+                            else if (type == "fragments")
+                            {
+                                Console.WriteLine("Valanyr obtained!");
+                            }
+                            else if (type == "motes")
+                            {
+                                Console.WriteLine("Dragonwrath obtained!");
+                            }
+                            break;
+                        }
+                    }
+
+                    else
+                    {
+                        if (anoderItem.ContainsKey(type))
+                        {
+                            anoderItem[type] += quantity;
+                        }
+                        else
+                        {
+                            anoderItem[type] = quantity;
+                        }
+                    }
+                }
+                if (haveWiner)
+                {
+                    break;
+                }               
+            }
+
+            foreach (var kvp in legendaryItem.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+            {
+                Console.WriteLine($"{kvp.Key}: {kvp.Value} ");
+            }
+            foreach (var kvp in anoderItem.OrderBy(x => x.Key))
+            {
+                Console.WriteLine($"{kvp.Key}: {kvp.Value} ");
+            }
+        }
+    }
+}
