@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+
+namespace _5._SoftUni_Parking
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int numberOfCommands = int.Parse(Console.ReadLine());
+
+            var registerCar = new Dictionary<string, string>();
+
+            for (int i = 0; i < numberOfCommands; i++)
+            {
+                string[] inpute = Console.ReadLine().Split().ToArray();
+                string command = inpute[0];
+                string username = inpute[1];
+
+                if (command == "register")
+                {
+                    string licensePlateNumber = inpute[2];
+                    if (!registerCar.ContainsKey(username))
+                    {
+                        registerCar.Add(username, licensePlateNumber);
+                        Console.WriteLine($"{username} registered {licensePlateNumber} successfully");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"ERROR: already registered with plate number {licensePlateNumber}");
+                    }
+                }
+                else if (command == "unregister")
+                {
+                    if (registerCar.ContainsKey(username))
+                    {
+                        registerCar.Remove(username);
+                        Console.WriteLine($"{username} unregistered successfully");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"ERROR: user {username} not found");
+                    }
+                }
+            }
+            foreach (var kvp in registerCar)
+            {
+                Console.WriteLine($"{kvp.Key} => {kvp.Value}");
+            }
+
+        }
+    }
+}
