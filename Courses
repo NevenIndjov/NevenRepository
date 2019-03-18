@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _6._Courses
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string command = String.Empty;
+
+            var studentsInCourses = new Dictionary<string, List<string>>();
+            while ((command = Console.ReadLine()) != "end")
+            {
+                string[] inpute = command.Split(" : ").ToArray();
+                string courseName = inpute[0];
+                string studentsName = inpute[1];
+                if (!studentsInCourses.ContainsKey(courseName))
+                {
+                    studentsInCourses[courseName] = new List<string>();
+                    studentsInCourses[courseName].Add(studentsName);
+                }
+                else if (!studentsInCourses[courseName].Contains(studentsName))
+                {                    
+                    studentsInCourses[courseName].Add(studentsName);
+                }
+            }
+            foreach (var kvp in studentsInCourses.OrderByDescending(x => x.Value.Count))
+            {
+                Console.WriteLine($"{kvp.Key}: {kvp.Value.Count}");
+                foreach (var students in kvp.Value.OrderBy(x => x))
+                {
+                    Console.WriteLine($"-- {students}");
+                }
+            }
+        }
+    }
+}
