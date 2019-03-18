@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+
+namespace _4._Orders
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string command = String.Empty;
+            var order = new Dictionary<string, double[]>();
+            while ((command = Console.ReadLine()) != "buy")
+            {                
+                string[] productsAndPrice = command.Split().ToArray();
+                string productName = productsAndPrice[0];
+                double price = double.Parse(productsAndPrice[1]);
+                int quantities = int.Parse(productsAndPrice[2]);
+                if (!order.ContainsKey(productName))
+                {
+                    double[] priceAndQuontities = {price, quantities};
+                    order[productName] = priceAndQuontities;
+                }
+                else
+                {                    
+                    if (order[productName][0] != price)
+                    {
+                        double newQuanities = order[productName][1] + quantities;
+                        double[] priceAndQuontities = {price, newQuanities};
+                        order[productName] = priceAndQuontities;
+                    }                   
+                }
+            }
+            foreach (var kvp in order)
+            {
+                double total = kvp.Value[0] * kvp.Value[1];
+                Console.WriteLine($"{kvp.Key} -> {total:f2}");
+            }
+        }
+    }
+}
