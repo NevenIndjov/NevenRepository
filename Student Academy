@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _7._Student_Academy
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int numberOfGrade = int.Parse(Console.ReadLine());
+            var studentsAndGrade = new Dictionary<string, List<double>>();
+
+            for (int i = 0; i < numberOfGrade; i++)
+            {
+                string studentsName = Console.ReadLine();
+                double grade = double.Parse(Console.ReadLine());
+                if (!studentsAndGrade.ContainsKey(studentsName))
+                {
+                    studentsAndGrade[studentsName] = new List<double>();
+                    studentsAndGrade[studentsName].Add(grade);
+                }
+                else
+                {
+                    studentsAndGrade[studentsName].Add(grade);
+                }
+            }
+
+            foreach (var kvp in studentsAndGrade.OrderByDescending(x => x.Value.Average()))
+            {
+                double aferageGrade = kvp.Value.Average();
+                
+                if (aferageGrade >= 4.5)
+                {
+                    Console.WriteLine($"{kvp.Key} -> {aferageGrade:f2}");
+                }
+                
+                
+            }
+        }
+    }
+}
