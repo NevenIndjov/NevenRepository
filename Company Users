@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _8._Company_Users
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string inpute = Console.ReadLine();
+
+            var companyNameAndEmployeeId = new Dictionary<string, List<string>>();
+
+            while (inpute != "End")
+            {
+                string[] informationInpute = inpute.Split(" -> ").ToArray();
+                string companyName = informationInpute[0];
+                string employeeId = informationInpute[1];
+
+                if (!companyNameAndEmployeeId.ContainsKey(companyName))
+                {
+                    companyNameAndEmployeeId[companyName] = new List<string>();
+                    companyNameAndEmployeeId[companyName].Add(employeeId);
+                }
+                else if (!companyNameAndEmployeeId[companyName].Contains(employeeId))
+                {
+                    companyNameAndEmployeeId[companyName].Add(employeeId);
+                }
+                inpute = Console.ReadLine();
+            }
+
+            foreach (var kvp in companyNameAndEmployeeId.OrderBy(x => x.Key))
+            {
+                Console.WriteLine($"{kvp.Key}");
+
+                foreach (var employeeId in kvp.Value)
+                {
+                    Console.WriteLine($"-- {employeeId}");
+                }
+            }
+        }
+    }
+}
