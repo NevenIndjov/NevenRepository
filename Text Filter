@@ -1,0 +1,23 @@
+using System;
+
+namespace _4._Text_Filter
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string textToRemuve = Console.ReadLine();
+            string text = Console.ReadLine();
+            string[] wordToRemuve = textToRemuve.Split(", ");
+
+            foreach (var word in wordToRemuve)
+            {
+                string replaceWith = new string('*', word.Length);
+                
+                text = text.Replace(word, replaceWith);
+            }
+            Console.WriteLine(text);
+
+        }
+    }
+}
