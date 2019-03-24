@@ -1,0 +1,37 @@
+using System;
+using System.Text;
+
+
+namespace _5._Digits__Letters_and_Other
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string input = Console.ReadLine();
+            string digit = String.Empty;
+            string leter = String.Empty;
+            string characters = String.Empty;
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (char.IsDigit(input[i]))
+                {
+                    digit += input[i];
+                }
+                else if (char.IsLetter(input[i]))
+                {
+                    leter += input[i];
+                }
+                else
+                {
+                    characters += input[i];
+                }
+            }
+            Console.WriteLine(digit);
+            Console.WriteLine(leter);
+            Console.WriteLine(characters);
+
+
+        }
+    }
+}
