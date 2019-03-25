@@ -1,0 +1,29 @@
+using System;
+using System.Text;
+using System.Text.RegularExpressions;
+
+namespace _6._Replace_Repeating_Chars
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string inpute = Console.ReadLine();
+            StringBuilder result = new StringBuilder();
+            char lastChar = ' ';
+            for (int i = 0; i < inpute.Length; i++)
+            {
+                char curentChar = inpute[i];
+
+
+                if (lastChar != curentChar)
+                {
+                    result.Append(curentChar);
+                }
+                lastChar = curentChar;
+            }
+            Console.WriteLine(result);
+
+        }
+    }
+}
