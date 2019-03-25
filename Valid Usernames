@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+
+namespace _1._Valid_Usernames
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] input = Console.ReadLine().Split(", ");
+           
+            for (int i = 0; i < input.Length; i++)
+            {
+                string word = input[i];
+                bool isValid = false;
+                if (word.Length >= 3 && word.Length <= 16)
+                {
+                    for (int j = 0; j < word.Length; j++)
+                    {
+                        char curentCharacter = word[j];
+
+                        if (char.IsLetterOrDigit(curentCharacter)
+                            || curentCharacter == '-'
+                            || curentCharacter == '_')
+                        {
+                            isValid = true;
+                        }
+                        else
+                        {
+                            isValid = false;
+                            break;
+                        }
+                    }
+                }
+                if (isValid)
+                {
+                    Console.WriteLine(word);
+                }
+
+
+            }
+
+
+        }
+    }
+}
