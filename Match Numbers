@@ -1,0 +1,23 @@
+using System;
+using System.Text;
+using System.Text.RegularExpressions;
+
+namespace _8._Match_Numbers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string numbers = Console.ReadLine();
+            string regex = @"(^|(?<=\s))-?\d+(\.\d+)?($|(?=\s))";
+            StringBuilder result = new StringBuilder();
+
+            MatchCollection matches = Regex.Matches(numbers, regex);
+            foreach (Match number in matches)
+            {
+                Console.Write(number + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
