@@ -1,0 +1,22 @@
+using System;
+using System.Text;
+
+namespace _4.__Caesar_Cipher
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string inpute = Console.ReadLine();
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var simbol in inpute)
+            {
+                char encrypted = (char)(simbol + 3);
+                sb.Append(encrypted);
+            }
+            Console.WriteLine(sb);
+
+        }
+    }
+}
